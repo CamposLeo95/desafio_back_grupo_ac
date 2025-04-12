@@ -1,0 +1,17 @@
+@base_url = http://localhost:8080
+
+# GET {{base_url}}/users
+# Content-Type: application/json
+###
+
+POST {{base_url}}/transaction
+Content-Type: application/json
+
+{
+    "amount": 1000,
+    "from_account_id": 1,
+    "to_account_id": 2,
+    "description": "Transfer from account 1 to account 2"
+}
+
+
