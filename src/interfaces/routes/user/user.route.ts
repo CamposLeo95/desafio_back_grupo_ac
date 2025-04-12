@@ -9,7 +9,14 @@ export class UserRoutes {
 	}
 
 	private setupRoutes() {
-		this.routes.get("/user", this.userController.createUser.bind(this));
+		this.routes.post(
+			"/user",
+			this.userController.createUser.bind(this.userController),
+		);
+		this.routes.get(
+			"/users",
+			this.userController.findAllUsers.bind(this.userController),
+		);
 	}
 
 	public getRoutes(): Router {
