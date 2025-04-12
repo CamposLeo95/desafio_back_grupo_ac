@@ -16,5 +16,11 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"type": "commonjs"
+	"type": "commonjs",
+	"dependencies": {
+		"@types/dotenv": "^6.1.1",
+		"@types/express": "^5.0.1",
+		"dotenv": "^16.5.0",
+		"express": "^5.1.0"
+	}
 }
