@@ -5,14 +5,19 @@ export class FindAllUsersUseCase {
 	constructor(private userRepository: IUserRepository) {}
 
 	async execute(): Promise<Output> {
-		console.log("teste");
 		const users = await this.userRepository.findAll();
+		const finalUsers = users.map(this.outPutMapper);
 		return {
-			data: users,
+			data: finalUsers,
 		};
+	}
+
+	outPutMapper(user: User) {
+		const { password, ...userWithoutPassword } = user;
+		return userWithoutPassword;
 	}
 }
 
 type Output = {
-	data: User[];
+	data: Omit<User, "password">[];
 };

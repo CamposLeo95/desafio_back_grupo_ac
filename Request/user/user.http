@@ -9,10 +9,10 @@ Content-Type: application/json
 
 {
     "name": "Leonardo",
-    "cpf": "12345678900",
-    "email": "leonardo@email.com",
+    "cpf": "1234543323",
+    "email": "leonardo3@email.com",
     "password": "pass@1234",
-    "admin": true
+    "admin": false
 }
 
 

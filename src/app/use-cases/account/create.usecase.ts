@@ -7,13 +7,24 @@ export class CreateAccountUseCase {
 	constructor(readonly accountRepository: IAccountRepository) {}
 
 	async execute(account: Input): Promise<Output> {
+		let accountNumber = generateAccountNumber();
+		let accountExists =
+			await this.accountRepository.findByAccountNumber(accountNumber);
+
+		while (accountExists) {
+			accountNumber = generateAccountNumber();
+			accountExists =
+				await this.accountRepository.findByAccountNumber(accountNumber);
+		}
+
 		const newAccount = new Account(
 			uuidv4(),
 			account.id_user,
 			0,
-			generateAccountNumber(),
+			accountNumber,
 			new Date(),
 		);
+
 		await this.accountRepository.save(newAccount);
 		return {
 			data: {

@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { User } from "../../../domain/entities/user.entity";
 import type { IUserRepository } from "../../../domain/repositories/user.repository";
+import { AppError } from "../../../shared/exceptions/app-error";
 import { BcryptPasswordHash } from "../../services/password-hash/bcrypt-password-hash";
 import type { CreateAccountUseCase } from "../account/create.usecase";
 
@@ -11,6 +12,12 @@ export class CreateUserUseCase {
 	) {}
 
 	async execute(user: Input): Promise<Output> {
+		const userExists = await this.userRepository.findByEmail(user.email);
+		const userExistsByCpf = await this.userRepository.findByCpf(user.cpf);
+
+		if (userExistsByCpf) throw new AppError("CPF already registered", 409);
+		if (userExists) throw new AppError("Email already registered", 409);
+
 		const bcryptService = new BcryptPasswordHash(10);
 		const passwordHash = await bcryptService.hash(user.password);
 
