@@ -16,9 +16,9 @@ export class UserController {
 
 		try {
 			const result = await this.createUserUseCase.execute(userDTO);
-			return res.status(201).json(result);
+			res.status(201).json(result);
 		} catch (error: unknown) {
-			return res.status(400).json({ error: error });
+			res.status(400).json({ error: error });
 		}
 	}
 }
