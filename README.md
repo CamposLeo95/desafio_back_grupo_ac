@@ -1,6 +1,6 @@
 # 📌 Transferência (Back end)
 
-![Badge de Status](https://img.shields.io/badge/status-EM%20DESENVOLVIMENTO-orange)
+![Badge de Status](https://img.shields.io/badge/status-CONCLUIDO-green)
 
 Backend de uma API para realização de transferências entre usuarios feita para o desafio do GRUPO ADRIANO COBBUCIO. 
 
