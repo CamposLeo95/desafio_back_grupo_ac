@@ -8,7 +8,7 @@ Content-Type: application/json
 ###
 
 # BUSCAR TRANSACAO POR ACCOUNT_NUMBER
-GET {{base_url}}/transaction/47572168
+GET {{base_url}}/transaction/66807289
 Content-Type: application/json
 
 ###
@@ -18,16 +18,16 @@ POST {{base_url}}/transaction
 Content-Type: application/json
 
 {
-    "amount": 700,
-    "from_account_number": 47572168,
-    "to_account_number": 38758378,
+    "amount": 500,
+    "from_account_number": 36650960,
+    "to_account_number": 30126965,
     "description": "Transfer from account 1 to account 2"
 }
 
 ###
 
 # REVERTER TRANSACAO
-POST {{base_url}}/transaction/reversal/152eea67-044d-4d76-aa69-f1a567b4daa1
+POST {{base_url}}/transaction/reversal/20634a94-7489-4d92-9bf2-e24ce6a560de
 Content-Type: application/json
 
 

@@ -9,13 +9,13 @@ export class DebitAccountUseCase {
 			account.account_number,
 		);
 
-		if (!accountExists) throw new AppError("Account not found", 404);
+		if (!accountExists) {
+			throw new AppError("Conta não encontrada!", 404);
+		}
 
-		if (accountExists.balance === 0)
-			throw new AppError("Account balance is zero", 400);
-
-		if (accountExists.balance < account.amount)
-			throw new AppError("Insufficient funds", 400);
+		if (accountExists.balance < account.amount || accountExists.balance === 0) {
+			throw new AppError("Saldo insulficiente!", 400);
+		}
 
 		await this.accountRepository.debit(account.account_number, account.amount);
 

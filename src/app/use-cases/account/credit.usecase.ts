@@ -9,7 +9,7 @@ export class CreditAccountUseCase {
 			account.account_number,
 		);
 
-		if (!accountExists) throw new AppError("Account not found", 404);
+		if (!accountExists) throw new AppError("Conta não encontrada!", 404);
 
 		await this.accountRepository.credit(account.account_number, account.amount);
 

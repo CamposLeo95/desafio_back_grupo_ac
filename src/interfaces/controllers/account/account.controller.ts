@@ -15,12 +15,16 @@ export class AccountController {
 		try {
 			const { account_number, amount } = req.body;
 			await this.creditAccountUseCase.execute({ account_number, amount });
-			res.status(200).json({ message: "Account credited successfully" });
+			res
+				.status(200)
+				.json({
+					message: `Valor ${amount} creditado na conta ${account_number} `,
+				});
 		} catch (error) {
 			if (error instanceof AppError) {
 				res.status(error.statusCode).json({ message: error.message });
 			}
-			res.status(500).json({ error: "Internal server error" });
+			res.status(500).json({ error: "Erro interno no servidor!" });
 		}
 	}
 
@@ -33,7 +37,7 @@ export class AccountController {
 			if (error instanceof AppError) {
 				res.status(error.statusCode).json({ message: error.message });
 			}
-			res.status(500).json({ error: "Internal server error" });
+			res.status(500).json({ error: "Erro interno no servidor!" });
 		}
 	}
 
@@ -45,7 +49,7 @@ export class AccountController {
 			if (error instanceof AppError) {
 				res.status(error.statusCode).json({ message: error.message });
 			}
-			res.status(500).json({ error: "Internal server error" });
+			res.status(500).json({ error: "Erro interno no servidor!" });
 		}
 	}
 }

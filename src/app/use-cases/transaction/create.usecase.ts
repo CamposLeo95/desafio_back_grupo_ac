@@ -22,7 +22,7 @@ export class CreateTransactionUseCase {
 
 		if (!fromAccount) {
 			throw new AppError(
-				`account ${transaction.from_account_number} not found`,
+				`A conta, ${transaction.from_account_number}, não foi encontrada`,
 				404,
 			);
 		}
@@ -32,13 +32,13 @@ export class CreateTransactionUseCase {
 		);
 		if (!toAccount) {
 			throw new AppError(
-				`account ${transaction.to_account_number} not found`,
+				`A conta, ${transaction.to_account_number}, não foi encontrada`,
 				404,
 			);
 		}
 
 		if (transaction.amount <= 0) {
-			throw new AppError("Amount must be greater than 0", 400);
+			throw new AppError("O valor da transferência deve ser maior que 0", 400);
 		}
 
 		await this.debitAccountUseCase.execute({

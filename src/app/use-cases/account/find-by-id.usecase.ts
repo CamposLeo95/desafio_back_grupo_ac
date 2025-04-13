@@ -8,7 +8,7 @@ export class FindByIdAccountUseCase {
 	async execute(id: string): Promise<Account> {
 		const account = await this.accountRepository.findById(id);
 
-		if (!account) throw new AppError("Account not found", 404);
+		if (!account) throw new AppError("Conta não encontrada!", 404);
 
 		return account;
 	}

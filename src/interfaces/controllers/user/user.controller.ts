@@ -28,7 +28,7 @@ export class UserController {
 			if (error instanceof AppError) {
 				res.status(error.statusCode).json({ message: error.message });
 			}
-			res.status(500).json({ error: "Internal server error" });
+			res.status(500).json({ error: "Erro interno no servidor!" });
 		}
 	}
 
@@ -40,7 +40,7 @@ export class UserController {
 			if (error instanceof AppError) {
 				res.status(error.statusCode).json({ message: error.message });
 			}
-			res.status(500).json({ error: "Internal server error" });
+			res.status(500).json({ error: "Erro interno no servidor!" });
 		}
 	}
 }

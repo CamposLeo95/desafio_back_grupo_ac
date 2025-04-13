@@ -7,25 +7,27 @@ import { TransactionController } from "../../interfaces/controllers/transaction/
 import { RepoAccountTeste } from "../db/prisma/account.repository";
 import { RepoTransactionTeste } from "../db/prisma/transaction.repository";
 
-const repoTeste = new RepoTransactionTeste();
+const transactionRepoTeste = new RepoTransactionTeste();
 const repoAccountTeste = new RepoAccountTeste();
 
 const creditAccountUseCase = new CreditAccountUseCase(repoAccountTeste);
 const debitAccountUseCase = new DebitAccountUseCase(repoAccountTeste);
 
 const createTransactionUseCase = new CreateTransactionUseCase(
-	repoTeste,
+	transactionRepoTeste,
 	repoAccountTeste,
 	creditAccountUseCase,
 	debitAccountUseCase,
 );
 
 const findAllSendTransactionByAccountUseCase =
-	new FindAllSendTransactionByAccountUseCase(repoTeste);
+	new FindAllSendTransactionByAccountUseCase(transactionRepoTeste);
 
 const reversalTransactionUseCase = new ReversalTransactionUseCase(
-	repoTeste,
-	createTransactionUseCase,
+	transactionRepoTeste,
+	repoAccountTeste,
+	creditAccountUseCase,
+	debitAccountUseCase,
 );
 
 export const transactionController = new TransactionController(

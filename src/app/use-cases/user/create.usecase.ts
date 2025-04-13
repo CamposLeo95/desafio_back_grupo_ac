@@ -15,8 +15,8 @@ export class CreateUserUseCase {
 		const userExists = await this.userRepository.findByEmail(user.email);
 		const userExistsByCpf = await this.userRepository.findByCpf(user.cpf);
 
-		if (userExistsByCpf) throw new AppError("CPF already registered", 409);
-		if (userExists) throw new AppError("Email already registered", 409);
+		if (userExistsByCpf) throw new AppError("CPF já cadastrado!", 409);
+		if (userExists) throw new AppError("Email já cadastrado!", 409);
 
 		const bcryptService = new BcryptPasswordHash(10);
 		const passwordHash = await bcryptService.hash(user.password);
