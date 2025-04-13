@@ -22,7 +22,7 @@ const dbUsers: User[] = [
 	},
 ];
 
-export class RepoUserTeste implements IUserRepository {
+export class FakeRepoUser implements IUserRepository {
 	async findAll(): Promise<User[]> {
 		return dbUsers;
 	}

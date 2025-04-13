@@ -17,7 +17,7 @@ const dbAccount: Account[] = [
 	},
 ];
 
-export class RepoAccountTeste implements IAccountRepository {
+export class FakeRepoAccount implements IAccountRepository {
 	async findAll(): Promise<Account[]> {
 		return dbAccount;
 	}

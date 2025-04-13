@@ -25,7 +25,7 @@ const dbTransaction: Transaction[] = [
 	},
 ];
 
-export class RepoTransactionTeste implements ITransactionRepository {
+export class FakeRepoTransaction implements ITransactionRepository {
 	async findById(id: string): Promise<Transaction | null> {
 		const transition = dbTransaction.find(
 			(transaction) => transaction.id === id,

@@ -4,8 +4,10 @@ import type { IAccountRepository } from "../../../domain/repositories/account.re
 import type { ITransactionRepository } from "../../../domain/repositories/transaction.repository";
 import { TransactionStatus } from "../../../domain/types/transaction.type";
 import { AppError } from "../../../shared/exceptions/app-error";
+import { isUserAdmin } from "../../../shared/utils/is-admin";
 import type { CreditAccountUseCase } from "../account/credit.usecase";
 import type { DebitAccountUseCase } from "../account/debit.usecase";
+import type { ApprovedRequestReversalUseCase } from "../request-reversal/approved-request-reversal.usecase";
 
 export class ReversalTransactionUseCase {
 	constructor(
@@ -13,10 +15,13 @@ export class ReversalTransactionUseCase {
 		private readonly accountRepository: IAccountRepository,
 		private creditAccountUseCase: CreditAccountUseCase,
 		private debitAccountUseCase: DebitAccountUseCase,
+		private approvedRequestReversalUseCase: ApprovedRequestReversalUseCase,
 	) {}
 
-	async execute(id: string): Promise<Output> {
+	async execute(id: string, requestId: string, token: string): Promise<Output> {
 		const transactionExists = await this.transactionRepository.findById(id);
+
+		isUserAdmin(token);
 
 		if (!transactionExists) {
 			throw new AppError("Transação não encontrada", 404);
@@ -61,7 +66,7 @@ export class ReversalTransactionUseCase {
 			});
 
 		if (hasTransactionReversal) {
-			throw new AppError("Esta transação já foi realizada!", 400);
+			throw new AppError("Esse estorno já foi realizada!", 400);
 		}
 
 		const newTransaction = new Transaction(
@@ -84,6 +89,8 @@ export class ReversalTransactionUseCase {
 			account_number: transactionExists.from_account_number,
 			amount: transactionExists.amount,
 		});
+
+		await this.approvedRequestReversalUseCase.execute(requestId);
 
 		await this.transactionRepository.save(newTransaction);
 

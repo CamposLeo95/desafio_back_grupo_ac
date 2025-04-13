@@ -15,11 +15,9 @@ export class AccountController {
 		try {
 			const { account_number, amount } = req.body;
 			await this.creditAccountUseCase.execute({ account_number, amount });
-			res
-				.status(200)
-				.json({
-					message: `Valor ${amount} creditado na conta ${account_number} `,
-				});
+			res.status(200).json({
+				message: `Valor ${amount} creditado na conta ${account_number} `,
+			});
 		} catch (error) {
 			if (error instanceof AppError) {
 				res.status(error.statusCode).json({ message: error.message });
@@ -44,6 +42,7 @@ export class AccountController {
 	async findAll(_req: Request, res: Response): Promise<void> {
 		try {
 			const accounts = await this.findAllAccountUseCase.execute();
+
 			res.status(200).json(accounts);
 		} catch (error) {
 			if (error instanceof AppError) {

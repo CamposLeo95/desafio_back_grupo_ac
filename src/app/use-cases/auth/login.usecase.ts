@@ -14,12 +14,12 @@ export class LoginUseCase {
 		const userDB = await this.userRepository.findByEmail(email);
 
 		if (!userDB) {
-			throw new AppError("Usuário ou senha invalidos! 1", 404);
+			throw new AppError("Usuário ou senha invalidos", 404);
 		}
 
 		await this.bcryptPasswordHash.verifyUser(userReq, userDB);
 
-		const token = await generateToken(userDB.id, userDB.email);
+		const token = generateToken(userDB.id, userDB.email, userDB.admin);
 
 		console.log(token);
 

@@ -34,9 +34,15 @@ export class TransactionController {
 
 	async reversalTransaction(req: Request, res: Response) {
 		const { id } = req.params;
+		const { requestId } = req.body;
+		const token = req.headers.authorization?.split(" ")[1] || "";
 
 		try {
-			const transaction = await this.ReversalTransactionUseCase.execute(id);
+			const transaction = await this.ReversalTransactionUseCase.execute(
+				id,
+				requestId,
+				token,
+			);
 			res.status(200).json(transaction);
 		} catch (error) {
 			if (error instanceof AppError) {

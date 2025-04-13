@@ -1,0 +1,46 @@
+@base_url = http://localhost:8080
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI1ZDBiYTg5LWUwZDktNDAwNi05OGIxLTk4MjM4OWJhMzgzMSIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTc0NDU3MjQ1MCwiZXhwIjoxNzQ0NjAxMjUwfQ.qEZuJ7LUGaU7i2nsRUh3dZNvxgpo9lb3pIN-Y44EwTE
+
+###
+GET {{base_url}}/request-reversal
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+
+# SOLICITACAO DE ESTORNO - /request-reversal/:idTransaction
+
+POST {{base_url}}/request-reversal/28aeb886-79e0-4f7d-af79-28883559bfb9
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "description": "Envio para a conta errada, favor estornar"
+}
+
+###
+#/request-reversal/pending/:idRequestReversal
+
+PUT {{base_url}}/request-reversal/pending/42fcb3c7-86eb-4870-9348-079d726dae6e
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+# /request-reversal/reject/:idRequestReversal
+
+PUT {{base_url}}/request-reversal/reject/42fcb3c7-86eb-4870-9348-079d726dae6e
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+
+
+
+
+
+
+

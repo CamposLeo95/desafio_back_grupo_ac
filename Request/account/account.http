@@ -1,5 +1,5 @@
 @base_url = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzYzAzZWZjLTE5N2UtNGRkMy04YjgzLTM4Mzg3ZjQyZmZlMyIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiaWF0IjoxNzQ0NTUzMjUwLCJleHAiOjE3NDQ1ODIwNTB9.pGkYXguRt2MuBZ4Asors0clAv4YKxGe0lNKu5HRR7aE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcyZjFhZTE1LTFhZmYtNDkwZi04NjAxLWEzZTU0ZTUxMmM3NSIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE3NDQ1Njc3NjcsImV4cCI6MTc0NDU5NjU2N30.KG8onOnJdD-GOJBaIO4O08mZxAXYsZeUeo4trMR7QrU
 
 
 # BUSCAR CONTAS POR ID
@@ -22,7 +22,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "account_number": 12026547,
+    "account_number": 57162963,
     "amount": 1000
 }
 

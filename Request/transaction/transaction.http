@@ -1,6 +1,6 @@
 @base_url = http://localhost:8080
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzYzAzZWZjLTE5N2UtNGRkMy04YjgzLTM4Mzg3ZjQyZmZlMyIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiaWF0IjoxNzQ0NTUzMjUwLCJleHAiOjE3NDQ1ODIwNTB9.pGkYXguRt2MuBZ4Asors0clAv4YKxGe0lNKu5HRR7aE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhZjNlODAzLTg5MjQtNDg1ZS1iZDM3LWQ2NTc3MzU3MzRkNCIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTc0NDU3MzcwNSwiZXhwIjoxNzQ0NjAyNTA1fQ.zP8Js9z8nnnAti4mANLVFBaOce7X8Dun5VzfoL29PQs
 
 
 # BUSCAR TODAS AS CONTAS
@@ -11,7 +11,7 @@ Authorization: Bearer {{token}}
 ###
 
 # BUSCAR TRANSACAO POR ACCOUNT_NUMBER
-GET {{base_url}}/transaction/66807289
+GET {{base_url}}/transaction/30126965
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -23,18 +23,22 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "amount": 500,
-    "from_account_number": 36650960,
-    "to_account_number": 30126965,
+    "amount": 200,
+    "from_account_number": 30126965,
+    "to_account_number": 66807289,
     "description": "Transfer from account 1 to account 2"
 }
 
 ###
 
 # REVERTER TRANSACAO
-POST {{base_url}}/transaction/reversal/20634a94-7489-4d92-9bf2-e24ce6a560de
+POST {{base_url}}/transaction/reversal/28aeb886-79e0-4f7d-af79-28883559bfb9
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+{
+    "requestId": "42fcb3c7-86eb-4870-9348-079d726dae6e"
+}
 
 
 

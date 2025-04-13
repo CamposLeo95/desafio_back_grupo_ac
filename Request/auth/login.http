@@ -10,7 +10,7 @@ Content-Type: application/json
     "cpf": "098765432112",
     "email": "maria@email.com",
     "password": "pass1234",
-    "admin": false
+    "admin": true
 }
 
 ###
