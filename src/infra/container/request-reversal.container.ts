@@ -5,23 +5,35 @@ import { RequestReversalUseCase } from "../../app/use-cases/request-reversal/req
 import { RequestReversalController } from "../../interfaces/controllers/request-reversal/request-reversal.contoller";
 import { FakeRepoRequestReversal } from "../db/Fake/request-reversal.repository";
 import { FakeRepoTransaction } from "../db/Fake/transaction.repository";
+import { PrismaRepoRequestReversal } from "../db/prisma/request-reversal.repository";
+import { PrismaRepoTransaction } from "../db/prisma/transaction.repository";
+import "dotenv/config";
+const FAKE_DB = process.env.FAKE_DB;
 
 const fakeRepoRequestReversal = new FakeRepoRequestReversal();
 const fakeRepoTransaction = new FakeRepoTransaction();
 
+const prismaRepoRequestReversal = new PrismaRepoRequestReversal();
+const prismaRepoTransaction = new PrismaRepoTransaction();
+
+const activeRepoRequestReversal =
+	FAKE_DB === "true" ? fakeRepoRequestReversal : prismaRepoRequestReversal;
+const activeRepoTransiction =
+	FAKE_DB === "true" ? fakeRepoTransaction : prismaRepoTransaction;
+
 const requestReversalUseCase = new RequestReversalUseCase(
-	fakeRepoRequestReversal,
-	fakeRepoTransaction,
+	activeRepoRequestReversal,
+	activeRepoTransiction,
 );
 
 const findAllRequestReversalUseCase = new FindAllRequestReversalUseCase(
-	fakeRepoRequestReversal,
+	activeRepoRequestReversal,
 );
 const pendingRequestReversalUseCase = new PendingRequestReversalUseCase(
-	fakeRepoRequestReversal,
+	activeRepoRequestReversal,
 );
 const rejectRequestReversalUseCase = new RejectRequestReversalUseCase(
-	fakeRepoRequestReversal,
+	activeRepoRequestReversal,
 );
 
 export const requestReversalController = new RequestReversalController(

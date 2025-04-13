@@ -22,13 +22,14 @@ services:
       - .env
     networks:
       - app-network
+
   app:
     container_name: app_desafio
     build: .
     depends_on:
       - db
     environment:
-      - DATABASE_URL: ${DATABASE_URL}
+      - DATABASE_URL=${DATABASE_URL}
     ports:
       - 8080:8080
     env_file:
@@ -38,4 +39,7 @@ services:
       - /app/node_modules
     networks:
       - app-network
-    
+    command: sh -c "npx prisma db pull && npx prisma generate && npm run dev"
+
+volumes:
+  postgres_data:

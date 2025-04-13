@@ -1,43 +1,45 @@
 @base_url = http://localhost:8080
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhZjNlODAzLTg5MjQtNDg1ZS1iZDM3LWQ2NTc3MzU3MzRkNCIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTc0NDU3MzcwNSwiZXhwIjoxNzQ0NjAyNTA1fQ.zP8Js9z8nnnAti4mANLVFBaOce7X8Dun5VzfoL29PQs
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIxNDNlMGIxLTgwMDMtNGE2MS1iZDI3LTU1MmQ0Yjg5OTYxNiIsImVtYWlsIjoibGVvbmFyZG9AZW1haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTc0NDU4Mzg2NCwiZXhwIjoxNzQ0NjEyNjY0fQ.tyKVxPNwroHdJPZ2RIZUNnJbZf6oHhT_bVkebXjtfWA
+
+@tokenNoAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2NTY5NmIxLWIzNGQtNGViZC05MThhLTU5MzZmYzhlNTlkMiIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE3NDQ1ODM5ODQsImV4cCI6MTc0NDYxMjc4NH0.DT3X2Oh_NhAlMa9AOaE7kcN1osf5FdOFFhLTQnEMsDo
 
 
 # BUSCAR TODAS AS CONTAS
 GET {{base_url}}/accounts
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 ###
 
 # BUSCAR TRANSACAO POR ACCOUNT_NUMBER
-GET {{base_url}}/transaction/30126965
+GET {{base_url}}/transaction/27945277
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 ###
 
 # FAZER TRANSACAO ENTRE CONTAS
 POST {{base_url}}/transaction
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 {
-    "amount": 200,
-    "from_account_number": 30126965,
-    "to_account_number": 66807289,
-    "description": "Transfer from account 1 to account 2"
+    "amount": 400,
+    "from_account_number": 27945277,
+    "to_account_number": 83049750,
+    "description": "Transferindo da conta 1 para a conta 2"
 }
 
 ###
 
 # REVERTER TRANSACAO
-POST {{base_url}}/transaction/reversal/28aeb886-79e0-4f7d-af79-28883559bfb9
+POST {{base_url}}/transaction/reversal/dc34f8a2-73bc-4e62-93de-68941ed28c13
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 {
-    "requestId": "42fcb3c7-86eb-4870-9348-079d726dae6e"
+    "requestId": "fe1ec982-13a6-43fd-82f2-493bb7ee0294"
 }
 
 

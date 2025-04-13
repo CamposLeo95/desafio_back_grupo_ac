@@ -6,22 +6,32 @@ POST {{base_url}}/user
 Content-Type: application/json
 
 {
-    "name": "Maria",
+    "name": "Leonardo",
     "cpf": "098765432112",
-    "email": "maria@email.com",
+    "email": "leonardo@email.com",
     "password": "pass1234",
     "admin": true
 }
 
 ###
 
-# AUTENTICAR USUARIO
+# AUTENTICAR USUARIO ADMIN
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+    "email": "leonardo@email.com",
+    "password": "pass1234"
+}
+###
+
+# AUTENTICAR USUARIO NO ADMIN
 POST {{base_url}}/login
 Content-Type: application/json
 
 {
     "email": "maria@email.com",
-    "password": "pass1234"
+    "password": "pass@1234"
 }
 ###
 

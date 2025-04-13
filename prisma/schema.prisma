@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model accounts {
+  id             String   @id @db.Uuid
+  id_user        String   @db.Uuid
+  balance        Decimal  @db.Decimal
+  account_number Int      @unique
+  created_at     DateTime @db.Timestamp(6)
+  users          users    @relation(fields: [id_user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
+}
+
+model request_reversals {
+  id                      String       @id @db.Uuid
+  from_account_number     Int
+  to_account_number       Int
+  transaction_id          String       @db.Uuid
+  description             String
+  amount                  Decimal      @db.Decimal
+  request_reversal_status String
+  transactions            transactions @relation(fields: [transaction_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_transaction")
+}
+
+model transactions {
+  id                     String              @id @db.Uuid
+  from_account_number    Int
+  to_account_number      Int
+  amount                 Decimal             @db.Decimal
+  description            String
+  transaction_status     String
+  id_transition_reversal String?             @db.Uuid
+  created_at             DateTime            @db.Timestamp(6)
+  request_reversals      request_reversals[]
+}
+
+model users {
+  id         String     @id @db.Uuid
+  name       String
+  cpf        String     @unique
+  email      String     @unique
+  password   String
+  admin      Boolean
+  created_at DateTime   @db.Timestamp(6)
+  accounts   accounts[]
+}

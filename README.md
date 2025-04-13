@@ -22,8 +22,8 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 - 🔹 [Postgres](#)
 - 🔹 [Prisma](#)
 - 🔹 [JWT](#)
-- 🔹 [Multer](#)
-- 🔹 [Jest](#)
+- 🔹 [Express](#)
+- 🔹 [Docker](#)
 
 
 ## 🛠️ Instalação e Configuração
@@ -39,14 +39,47 @@ Docker e Docker Compose (opcional, para ambiente isolado)
 #### 📥 Clone o repositório
 
 ```bash
-git clone https://github.com/CamposLeo95/projeto_back_post.git
-cd projeto_back_post
+git clone https://github.com/CamposLeo95/desafio_back_grupo_ac.git
+cd desafio_back_grupo_ac
 ```
 
 #### 📦 Instale as dependências
 
 ```bash
 npm install
+```
+## 🚀 Como Executar o Projeto
+
+##### Opção 1
+
+Aqui foi criado um banco de dados fake e um postgres com prisma 
+
+Para rodar o fake basta iniciar a aplicaçao com docker ou npm run dev e deixar a variavel FAKE_DB=true
+
+#### 🔥 Rodando em Desenvolvimento
+```bash
+npm run dev
+```
+##### Opção 2
+
+Caso queira iniciar com postgres e prisma inicie o FAKE_DB=false
+
+#### 🔧 Configuração do Ambiente
+
+```bash
+PORT=
+DATABASE_URL=
+POSTGRES_HOST=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+JWT_SECRET=
+FAKE_BD=
+```
+
+#### 🐳 Rodando com Docker
+```bash
+docker-compose up --build
 ```
 
 #### 🎲 Crie o banco de dados
@@ -59,82 +92,42 @@ projeto/
 │   ├── create_tables.sql
 ```
 
-
-#### 🔧 Configuração do Ambiente
-
-```bash
-DATABASE_URL=
-POSTGRES_HOST=
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-POSTGRES_DB=
-GOOGLE_APPLICATION_CREDENTIALS=
-PORT=
-JWT_SECRET=
-```
-## 🚀 Como Executar o Projeto
-
-#### 🔥 Rodando em Desenvolvimento
-```bash
-npx prisma db pull && npx prisma generate && npm run dev
-```
-#### 🐳 Rodando com Docker
-```bash
-docker-compose up --build
-```
-
-## 🧪 Testes
-Para rodar os testes, utilize:
-```bash
-npm run test
-```
-
 ## 📌 Rotas e Endpoints
 
 ### 🏷️ Autenticação
 | Método | Rota             | Descrição           | Type-data       | Data              |
 |--------|------------------|---------------------|-----------------|-------------------|
-| POST   | `/auth`          | Autenticação        | JSON            |  email / password |
+| POST   | `/login`        | Autenticação        | JSON            |  email:string / password:string |
 
 ### 📝 Users
 | Método | Rota             | Descrição            | Type-data       | Data              |
 |--------|------------------|----------------------|-----------------|-------------------|
-| POST   | `/users`         | Criar usuarios       | FormData        |  name / email / password / admin / perfil(file) cover(file) / bio |          
-| PUT    | `/users/userId`  | Atualizar usuarios   | FormData        |  name / email / password / admin / perfil(file) cover(file) / bio |          
-| GET    | `/users`         | Buscar usuarios      | -               | -                 |          
-| GET    | `/users/userId`  | Buscar usuario por ID| -               | -                 |     
-| DEL    | `/users/userId`  | Deletar usuario      | -               | -                 |               
+| POST   | `/users`         | Criar usuarios      | JSON        |  name:string / email:string / cpf:string / password:string / admin:boolean |          
+| GET    | `/users`  | Buscar usuarios   | JSON        |                   |          
+           
 
-### 📝 Posts
+### 📝 Transactions
 | Método | Rota             | Descrição           | Type-data       | Data              |
 |--------|------------------|---------------------|-----------------|-------------------|
-| POST   | `/posts`         | Criar post       | FormData        |  content / image(file) |          
-| DEL    | `/posts/idPost`  | Deletar post      | -               |-                 |            
-| GET    | `/posts`         | Buscar posts      | -               | -                 |          
-| GET    | `/posts/idPost`  | Buscar posts por ID| -               | -                 |     
-| GET    | `/posts/me`      | Buscar posts do usuario logado     | -               | -                 |    
-| GET    | `/posts/user/12`  |  Buscar posts por usuario    | -               | -                 |    
+| POST   | `/transaction`         | Criar Transação(token)      | JSON        |  amount: number / from_account_number: number / to_account_number: number / description: string  |          
+| POST    | `/transaction/reversal/:idTransaction`  | Reverter transaçao(token/admin)    | JSON               | requestId : string                 |            
+| GET    | `/transaction/:account_number`         | Buscar Transaçoes por numero da conta (token)     | -               | -                 |          
+ 
 
-### 📝 Comments
+### 📝 Account
 | Método | Rota             | Descrição           | Type-data       | Data              |
 |--------|------------------|---------------------|-----------------|-------------------|
-| POST   | `/auth/login`    | Autenticação        | JSON            |  email / password |          
-| POST   | `/auth/login`    | Autenticação        | JSON            |  email / password |    
+| POST   | `/account/credit`    | Creditar valor na conta (token)        | JSON            |  account_number: number / amount: number |          
+| GET    | `/account/:id`    | Buscar conta por id (token)        | JSON            |  email / password |    
+| GET    | `/accounts`    | Buscar todas as contas        | JSON            |  email / password |    
 
-### 📝 Comments
+### 📝 request-reversal
 | Método | Rota               | Descrição           | Type-data       | Data              |
 |--------|--------------------|---------------------|-----------------|-------------------|
-| POST   | `/posts/idPost/comments`| Criar comentario    | JSON            | content                 |          
-| PUT    | `/posts/idPost/comments/id`| Buscar comentario por post | JSON             | content                |   
-| DEL    | `/comments/ID`             | Deletar comentario     | -            |                       |          
-| GET    | `/posts/84/comments`| Buscar comentarios por post | -               | -                 |       
-
-### 📝 Likes
-| Método | Rota                | Descrição             | Type-data       | Data              |
-|--------|---------------------|-----------------------|-----------------|-------------------|
-| POST   | `/like/posts/postID`| Toggle Post           | -               | -                 |          
-| GET    | `/like/posts/postID`| Buscar likes por post | -               | -                 |     
-
+| POST   | `/request-reversal/:idTransaction`| Criar requisiçao de estorno    | JSON            | description: string                 |          
+| GET    | `/request-reversal`| Buscar todas as requisicoes de extorno | JSON             | content                |   
+| PUT    | `/request-reversal/pending/:idRequestReversal`             | Alterar status para pendente    | -            |                       |          
+| PUT    | `/request-reversal/reject/:idRequestReversal`| Alterar status para  rejeitado | -               | -                 |       
 
 
 ## 📂 Estrutura do Projeto
@@ -144,61 +137,45 @@ projeto/
 │-- 📂@types/
 │-- 📂node_modules/
 │-- 📂prisma/
+│-- 📂Request/
 │-- 📂SQL/
-│   ├── 📂app/
-│       ├── 📂comment/
-│           ├── 📂controllers/
-│           ├── 📂dtos/
-│           ├── 📂repositories/
-│           ├── index.ts
-│       ├── 📂auth/
-│       ├── 📂like/
-│       ├── 📂post/
-│       ├── 📂user/
+│-- 📂src/
+│   ├── 📂 app/
+│       ├── 📂services/
+│       ├── 📂 use-cases/
+│           ├── 📂 account/
+│           ├── 📂 auth/
+│           ├── 📂 request-reversal/
+│           ├── 📂 transactions/
+│           ├── 📂 user/
 │   ├── 📂domain/
-│       ├── 📂entities/
-│           ├── 📂comment/
-│           ├── 📂like/
-│           ├── 📂user/
-│       ├── 📂useCases/
-│           ├── 📂comment/
-│           ├── 📂auth/
-│           ├── 📂like/
-│           ├── 📂user/
+│       ├── 📂 entities/
+│       ├── 📂 Repositories/
+│       ├── 📂 types/
 │   ├── 📂infra/
-│       ├── 📂config/
-│           ├── 📂gcp/
-│           ├── 📂multer/
-│       ├── 📂db/
-│           ├── 📂prisma/
-│               ├── 📂mappers/
+│       ├── 📂 Container/
+│       ├── 📂 db/
+│           ├── Faker/
 │               ├── 📂repositories/
+│           ├── Prisma/
+│               ├── 📂repositories/
+│   ├── 📂interfaces/
+│       ├── 📂 controllers/
+│       ├── 📂 routes/
 │   ├── 📂middlewares/
-│   ├── 📂routes/
-│       ├── 📂comment/
-│       ├── 📂auth/
-│       ├── 📂like/
-│       ├── 📂post/
-│       ├── 📂user/
-│       ├── routes.ts
-│   ├── 📂services/
 │   ├── 📂shared/
 │       ├── 📂exceptions/
 │       ├── 📂types/
 │       ├── 📂utils/
-│   ├── 📂tests/ ("Segue a mesma estrutura do diretório SRC")
-│   ├── app.ts
+│   ├── main.ts
 │   ├── server.ts
-│-- .dockerignore
 │-- .env
 │-- .env.example
 │-- .gitignore
 │-- docker-compose.yml
-│-- Dockerfile.dev
-│-- Dockerfile.prod
-│-- jest.config.js
-│-- package.json
+│-- Dockerfile
 │-- package-lock.json
+│-- package.json
 │-- README.md
 │-- tsconfig.json
 ```

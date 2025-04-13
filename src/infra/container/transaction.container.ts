@@ -8,27 +8,45 @@ import { TransactionController } from "../../interfaces/controllers/transaction/
 import { FakeRepoAccount } from "../db/Fake/account.repository";
 import { FakeRepoRequestReversal } from "../db/Fake/request-reversal.repository";
 import { FakeRepoTransaction } from "../db/Fake/transaction.repository";
+import "dotenv/config";
+import { PrismaRepoAccount } from "../db/prisma/account.repository";
+import { PrismaRepoRequestReversal } from "../db/prisma/request-reversal.repository";
+import { PrismaRepoTransaction } from "../db/prisma/transaction.repository";
+const FAKE_DB = process.env.FAKE_DB;
 
 const fakeRepoAccount = new FakeRepoAccount();
 const fakeRepoTransaction = new FakeRepoTransaction();
 const fakerRepoRequestReversal = new FakeRepoRequestReversal();
 
-const creditAccountUseCase = new CreditAccountUseCase(fakeRepoAccount);
-const debitAccountUseCase = new DebitAccountUseCase(fakeRepoAccount);
+const prismaRepoAccount = new PrismaRepoAccount();
+const prismaRepoTransaction = new PrismaRepoTransaction();
+const prismaRepoRequestReversal = new PrismaRepoRequestReversal();
+
+const activeRepoTransiction =
+	FAKE_DB === "true" ? fakeRepoTransaction : prismaRepoTransaction;
+
+const activeRepoAccount =
+	FAKE_DB === "true" ? fakeRepoAccount : prismaRepoAccount;
+
+const activeRepoRequestReversal =
+	FAKE_DB === "true" ? fakerRepoRequestReversal : prismaRepoRequestReversal;
+
+const creditAccountUseCase = new CreditAccountUseCase(activeRepoAccount);
+const debitAccountUseCase = new DebitAccountUseCase(activeRepoAccount);
 const approvedRequestReversalUseCase = new ApprovedRequestReversalUseCase(
-	fakerRepoRequestReversal,
+	activeRepoRequestReversal,
 );
 const createTransactionUseCase = new CreateTransactionUseCase(
-	fakeRepoTransaction,
-	fakeRepoAccount,
+	activeRepoTransiction,
+	activeRepoAccount,
 	creditAccountUseCase,
 	debitAccountUseCase,
 );
 const findAllSendTransactionByAccountUseCase =
-	new FindAllSendTransactionByAccountUseCase(fakeRepoTransaction);
+	new FindAllSendTransactionByAccountUseCase(activeRepoTransiction);
 const reversalTransactionUseCase = new ReversalTransactionUseCase(
-	fakeRepoTransaction,
-	fakeRepoAccount,
+	activeRepoTransiction,
+	activeRepoAccount,
 	creditAccountUseCase,
 	debitAccountUseCase,
 	approvedRequestReversalUseCase,

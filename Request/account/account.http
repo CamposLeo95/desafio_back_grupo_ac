@@ -1,28 +1,30 @@
 @base_url = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcyZjFhZTE1LTFhZmYtNDkwZi04NjAxLWEzZTU0ZTUxMmM3NSIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE3NDQ1Njc3NjcsImV4cCI6MTc0NDU5NjU2N30.KG8onOnJdD-GOJBaIO4O08mZxAXYsZeUeo4trMR7QrU
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIxNDNlMGIxLTgwMDMtNGE2MS1iZDI3LTU1MmQ0Yjg5OTYxNiIsImVtYWlsIjoibGVvbmFyZG9AZW1haWwuY29tIiwiYWRtaW4iOnRydWUsImlhdCI6MTc0NDU4Mzg2NCwiZXhwIjoxNzQ0NjEyNjY0fQ.tyKVxPNwroHdJPZ2RIZUNnJbZf6oHhT_bVkebXjtfWA
+
+@tokenNoAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2NTY5NmIxLWIzNGQtNGViZC05MThhLTU5MzZmYzhlNTlkMiIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE3NDQ1ODM5ODQsImV4cCI6MTc0NDYxMjc4NH0.DT3X2Oh_NhAlMa9AOaE7kcN1osf5FdOFFhLTQnEMsDo
 
 
 # BUSCAR CONTAS POR ID
-GET {{base_url}}/account/22eb5561-5ec9-43e4-83ef-fdf666db6382
+GET {{base_url}}/account/f182feeb-6bfe-4024-bdd5-307f5327a4fc
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 ###
 
 # BUSCAR TODOS AS CONTAS
 GET {{base_url}}/accounts
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 ###
 
 # CREDITAR UM VALOR NA CONTA
 POST {{base_url}}/account/credit
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdmin}}
 
 {
-    "account_number": 57162963,
+    "account_number": 83049750,
     "amount": 1000
 }
 
