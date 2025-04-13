@@ -5,11 +5,13 @@ export class CreditAccountUseCase {
 	constructor(readonly accountRepository: IAccountRepository) {}
 
 	async execute(account: Input): Promise<Output> {
-		const accountExists = await this.accountRepository.findById(account.id);
+		const accountExists = await this.accountRepository.findByAccountNumber(
+			account.account_number,
+		);
 
 		if (!accountExists) throw new AppError("Account not found", 404);
 
-		await this.accountRepository.credit(account.id, account.amount);
+		await this.accountRepository.credit(account.account_number, account.amount);
 
 		return {
 			data: {
@@ -23,7 +25,7 @@ export class CreditAccountUseCase {
 }
 
 type Input = {
-	id: string;
+	account_number: number;
 	amount: number;
 };
 

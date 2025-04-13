@@ -5,7 +5,9 @@ export class DebitAccountUseCase {
 	constructor(readonly accountRepository: IAccountRepository) {}
 
 	async execute(account: Input): Promise<Output> {
-		const accountExists = await this.accountRepository.findById(account.id);
+		const accountExists = await this.accountRepository.findByAccountNumber(
+			account.account_number,
+		);
 
 		if (!accountExists) throw new AppError("Account not found", 404);
 
@@ -15,7 +17,7 @@ export class DebitAccountUseCase {
 		if (accountExists.balance < account.amount)
 			throw new AppError("Insufficient funds", 400);
 
-		await this.accountRepository.debit(account.id, account.amount);
+		await this.accountRepository.debit(account.account_number, account.amount);
 
 		return {
 			data: {
@@ -29,7 +31,7 @@ export class DebitAccountUseCase {
 }
 
 type Input = {
-	id: string;
+	account_number: number;
 	amount: number;
 };
 

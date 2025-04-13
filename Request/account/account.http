@@ -1,20 +1,25 @@
 @base_url = http://localhost:8080
 
 
-# Buscar conta por id
+# BUSCAR CONTAS POR ID
 GET {{base_url}}/account/22eb5561-5ec9-43e4-83ef-fdf666db6382
 Content-Type: application/json
 
 ###
 
-# Creditar valor a conta
+# BUSCAR TODOS AS CONTAS
+GET {{base_url}}/accounts
+Content-Type: application/json
+
+###
+
+# CREDITAR UM VALOR NA CONTA
 POST {{base_url}}/account/credit
 Content-Type: application/json
 
 {
-    "id": "22eb5561-5ec9-43e4-83ef-fdf666db6382",
+    "account_number": 46707761,
     "amount": 1000
-    
 }
 
 

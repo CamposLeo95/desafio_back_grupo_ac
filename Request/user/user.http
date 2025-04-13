@@ -1,16 +1,33 @@
 @base_url = http://localhost:8080
 
+#BUSCAR TODOS OS USUARIOS
 GET {{base_url}}/users
 Content-Type: application/json
+
 ###
 
+# CRIAR  USUARIO 1
 POST {{base_url}}/user
 Content-Type: application/json
 
 {
     "name": "Leonardo",
-    "cpf": "1234543323",
-    "email": "leonardo3@email.com",
+    "cpf": "12345678900",
+    "email": "leonardo@email.com",
+    "password": "pass@1234",
+    "admin": false
+}
+
+###
+
+# CRIAR  USUARIO 2
+POST {{base_url}}/user
+Content-Type: application/json
+
+{
+    "name": "Joao",
+    "cpf": "09876543211",
+    "email": "joao@email.com",
     "password": "pass@1234",
     "admin": false
 }

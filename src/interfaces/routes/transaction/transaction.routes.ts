@@ -15,6 +15,20 @@ export class TransactionRoutes {
 				this.transactionController,
 			),
 		);
+
+		this.routes.post(
+			"/transaction/reversal/:id",
+			this.transactionController.reversalTransaction.bind(
+				this.transactionController,
+			),
+		);
+
+		this.routes.get(
+			"/transaction/:account_number",
+			this.transactionController.findAllSendByAccount.bind(
+				this.transactionController,
+			),
+		);
 	}
 
 	public getRoutes() {

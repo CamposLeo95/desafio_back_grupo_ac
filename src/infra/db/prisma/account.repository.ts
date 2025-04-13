@@ -27,13 +27,13 @@ export class RepoAccountTeste implements IAccountRepository {
 		return account || null;
 	}
 
-	async credit(id: string, amount: number): Promise<void> {
-		const account = await this.findById(id);
+	async credit(account_number: number, amount: number): Promise<void> {
+		const account = await this.findByAccountNumber(account_number);
 		if (account) account.balance += amount;
 	}
 
-	async debit(id: string, amount: number): Promise<void> {
-		const account = await this.findById(id);
+	async debit(account_number: number, amount: number): Promise<void> {
+		const account = await this.findByAccountNumber(account_number);
 		if (account) {
 			account.balance -= amount;
 		}

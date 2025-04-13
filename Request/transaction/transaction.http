@@ -1,17 +1,35 @@
 @base_url = http://localhost:8080
 
-# GET {{base_url}}/users
-# Content-Type: application/json
+
+# BUSCAR TODAS AS CONTAS
+GET {{base_url}}/accounts
+Content-Type: application/json
+
 ###
 
+# BUSCAR TRANSACAO POR ACCOUNT_NUMBER
+GET {{base_url}}/transaction/47572168
+Content-Type: application/json
+
+###
+
+# FAZER TRANSACAO ENTRE CONTAS
 POST {{base_url}}/transaction
 Content-Type: application/json
 
 {
-    "amount": 1000,
-    "from_account_id": 1,
-    "to_account_id": 2,
+    "amount": 700,
+    "from_account_number": 47572168,
+    "to_account_number": 38758378,
     "description": "Transfer from account 1 to account 2"
 }
+
+###
+
+# REVERTER TRANSACAO
+POST {{base_url}}/transaction/reversal/152eea67-044d-4d76-aa69-f1a567b4daa1
+Content-Type: application/json
+
+
 
 

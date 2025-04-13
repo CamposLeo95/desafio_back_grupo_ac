@@ -18,6 +18,10 @@ export class AccountRoutes {
 			"/account/:id",
 			this.accountController.findById.bind(this.accountController),
 		);
+		this.routes.get(
+			"/accounts",
+			this.accountController.findAll.bind(this.accountController),
+		);
 	}
 
 	public getRoutes() {
