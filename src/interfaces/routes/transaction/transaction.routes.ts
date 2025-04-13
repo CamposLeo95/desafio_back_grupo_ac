@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { verifyToken } from "../../../middlewares/verify-token";
 import type { TransactionController } from "../../controllers/transaction/transaction.controller";
 
 export class TransactionRoutes {
@@ -11,6 +12,7 @@ export class TransactionRoutes {
 	private setupRoutes() {
 		this.routes.post(
 			"/transaction",
+			verifyToken,
 			this.transactionController.createTransaction.bind(
 				this.transactionController,
 			),
@@ -18,6 +20,7 @@ export class TransactionRoutes {
 
 		this.routes.post(
 			"/transaction/reversal/:id",
+			verifyToken,
 			this.transactionController.reversalTransaction.bind(
 				this.transactionController,
 			),
@@ -25,6 +28,7 @@ export class TransactionRoutes {
 
 		this.routes.get(
 			"/transaction/:account_number",
+			verifyToken,
 			this.transactionController.findAllSendByAccount.bind(
 				this.transactionController,
 			),

@@ -1,8 +1,11 @@
 @base_url = http://localhost:8080
 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzYzAzZWZjLTE5N2UtNGRkMy04YjgzLTM4Mzg3ZjQyZmZlMyIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiaWF0IjoxNzQ0NTUzMjUwLCJleHAiOjE3NDQ1ODIwNTB9.pGkYXguRt2MuBZ4Asors0clAv4YKxGe0lNKu5HRR7aE
+
 #BUSCAR TODOS OS USUARIOS
 GET {{base_url}}/users
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 
@@ -14,7 +17,7 @@ Content-Type: application/json
     "name": "Maria",
     "cpf": "098765432112",
     "email": "maria@email.com",
-    "password": "pass@1234",
+    "password": "pass1234",
     "admin": false
 }
 
@@ -26,8 +29,8 @@ Content-Type: application/json
 
 {
     "name": "Joao",
-    "cpf": "09876543211",
-    "email": "joao@email.com",
+    "cpf": "0987654343211",
+    "email": "joao2@email.com",
     "password": "pass@1234",
     "admin": false
 }

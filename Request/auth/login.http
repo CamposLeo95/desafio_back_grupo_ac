@@ -1,0 +1,29 @@
+@base_url = http://localhost:8080
+
+
+# CRIAR  USUARIO 1
+POST {{base_url}}/user
+Content-Type: application/json
+
+{
+    "name": "Maria",
+    "cpf": "098765432112",
+    "email": "maria@email.com",
+    "password": "pass1234",
+    "admin": false
+}
+
+###
+
+# AUTENTICAR USUARIO
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+    "email": "maria@email.com",
+    "password": "pass1234"
+}
+###
+
+
+

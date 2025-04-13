@@ -1,21 +1,26 @@
 @base_url = http://localhost:8080
 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzYzAzZWZjLTE5N2UtNGRkMy04YjgzLTM4Mzg3ZjQyZmZlMyIsImVtYWlsIjoibWFyaWFAZW1haWwuY29tIiwiaWF0IjoxNzQ0NTUzMjUwLCJleHAiOjE3NDQ1ODIwNTB9.pGkYXguRt2MuBZ4Asors0clAv4YKxGe0lNKu5HRR7aE
+
 
 # BUSCAR TODAS AS CONTAS
 GET {{base_url}}/accounts
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 
 # BUSCAR TRANSACAO POR ACCOUNT_NUMBER
 GET {{base_url}}/transaction/66807289
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 
 # FAZER TRANSACAO ENTRE CONTAS
 POST {{base_url}}/transaction
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "amount": 500,
@@ -29,6 +34,7 @@ Content-Type: application/json
 # REVERTER TRANSACAO
 POST {{base_url}}/transaction/reversal/20634a94-7489-4d92-9bf2-e24ce6a560de
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 
 

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { verifyToken } from "../../../middlewares/verify-token";
 import type { UserController } from "../../controllers/user/user.controller";
 
 export class UserRoutes {
@@ -15,6 +16,7 @@ export class UserRoutes {
 		);
 		this.routes.get(
 			"/users",
+			verifyToken,
 			this.userController.findAllUsers.bind(this.userController),
 		);
 	}
