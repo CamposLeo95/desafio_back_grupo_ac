@@ -53,15 +53,17 @@ npm install
 
 Crie uma pasta .env e preencha as variaveis
 
+#### Exemplo
+
 ```bash
-PORT=
-DATABASE_URL=
-POSTGRES_HOST=
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-POSTGRES_DB=
-JWT_SECRET=
-FAKE_BD=
+PORT=8080
+DATABASE_URL=postgresql://admin:pass1234@db:5432/group_ac
+POSTGRES_HOST=postgres
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=pass1234
+POSTGRES_DB=group_ac
+JWT_SECRET=secret1234
+FAKE_BD=false
 ```
 
 ## 🚀 Como Executar o Projeto
@@ -103,6 +105,10 @@ docker-compose up --build
 
 ## 📌 Rotas e Endpoints
 
+### 🧪 Testar Rotas
+
+Na pasta 📂 Request  voce encontra as rotas para realizar os Testes ou pode criar . 
+
 ### 🏷️ Autenticação
 | Método | Rota             | Descrição           | Type-data       | Data              |
 |--------|------------------|---------------------|-----------------|-------------------|
@@ -137,6 +143,7 @@ docker-compose up --build
 | GET    | `/request-reversal`| Buscar todas as requisicoes de extorno | JSON             | content                |   
 | PUT    | `/request-reversal/pending/:idRequestReversal`             | Alterar status para pendente    | -            |                       |          
 | PUT    | `/request-reversal/reject/:idRequestReversal`| Alterar status para  rejeitado | -               | -                 |       
+
 
 
 ## 📂 Estrutura do Projeto
